@@ -1,0 +1,121 @@
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"admissionregistration.k8s.io/v1beta1","kind":"MutatingWebhookConfiguration","metadata":{"annotations":{"maistra.io/mesh-generation":"2.0.1-6.el8-1"},"labels":{"app":"sidecarInjectorWebhook","app.kubernetes.io/component":"sidecarInjectorWebhook","app.kubernetes.io/instance":"admin7-istio-system","app.kubernetes.io/managed-by":"maistra-istio-operator","app.kubernetes.io/name":"sidecarInjectorWebhook","app.kubernetes.io/part-of":"istio","app.kubernetes.io/version":"2.0.1-6.el8-1","chart":"sidecarInjectorWebhook","heritage":"Tiller","maistra-version":"1.1.11","maistra.io/owner":"admin7-istio-system","release":"istio"},"name":"istio-sidecar-injector-admin7-istio-system"},"webhooks":[{"clientConfig":{"caBundle":"","service":{"name":"istio-sidecar-injector","namespace":"admin7-istio-system","path":"/inject"}},"failurePolicy":"Fail","name":"sidecar-injector.istio.io","namespaceSelector":{"matchExpressions":[{"key":"maistra.io/member-of","operator":"In","values":["admin7-istio-system"]},{"key":"maistra.io/ignore-namespace","operator":"DoesNotExist"}]},"rules":[{"apiGroups":[""],"apiVersions":["v1"],"operations":["CREATE"],"resources":["pods"]}]}]}
+    maistra.io/mesh-generation: 2.0.1-6.el8-1
+  creationTimestamp: "2021-01-18T20:41:51Z"
+  generation: 2
+  labels:
+    app: sidecarInjectorWebhook
+    app.kubernetes.io/component: sidecarInjectorWebhook
+    app.kubernetes.io/instance: admin7-istio-system
+    app.kubernetes.io/managed-by: maistra-istio-operator
+    app.kubernetes.io/name: sidecarInjectorWebhook
+    app.kubernetes.io/part-of: istio
+    app.kubernetes.io/version: 2.0.1-6.el8-1
+    chart: sidecarInjectorWebhook
+    heritage: Tiller
+    maistra-version: 1.1.11
+    maistra.io/owner: admin7-istio-system
+    release: istio
+  managedFields:
+  - apiVersion: admissionregistration.k8s.io/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:webhooks:
+        k:{"name":"sidecar-injector.istio.io"}:
+          f:clientConfig:
+            f:caBundle: {}
+    manager: istio-operator
+    operation: Update
+    time: "2021-01-18T20:41:51Z"
+  - apiVersion: admissionregistration.k8s.io/v1beta1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:maistra.io/mesh-generation: {}
+        f:labels:
+          .: {}
+          f:app: {}
+          f:app.kubernetes.io/component: {}
+          f:app.kubernetes.io/instance: {}
+          f:app.kubernetes.io/managed-by: {}
+          f:app.kubernetes.io/name: {}
+          f:app.kubernetes.io/part-of: {}
+          f:app.kubernetes.io/version: {}
+          f:chart: {}
+          f:heritage: {}
+          f:maistra-version: {}
+          f:maistra.io/owner: {}
+          f:release: {}
+      f:webhooks:
+        .: {}
+        k:{"name":"sidecar-injector.istio.io"}:
+          .: {}
+          f:admissionReviewVersions: {}
+          f:clientConfig:
+            .: {}
+            f:service:
+              .: {}
+              f:name: {}
+              f:namespace: {}
+              f:path: {}
+              f:port: {}
+          f:failurePolicy: {}
+          f:matchPolicy: {}
+          f:name: {}
+          f:namespaceSelector:
+            .: {}
+            f:matchExpressions: {}
+          f:objectSelector: {}
+          f:reinvocationPolicy: {}
+          f:rules: {}
+          f:sideEffects: {}
+          f:timeoutSeconds: {}
+    manager: istio-operator
+    operation: Update
+    time: "2021-01-18T20:41:51Z"
+  name: istio-sidecar-injector-admin7-istio-system
+  resourceVersion: "551848"
+  selfLink: /apis/admissionregistration.k8s.io/v1/mutatingwebhookconfigurations/istio-sidecar-injector-admin7-istio-system
+  uid: f9f30299-0e52-48d1-8f76-6e23a88b963f
+webhooks:
+- admissionReviewVersions:
+  - v1beta1
+  clientConfig:
+    caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUMzVENDQWNXZ0F3SUJBZ0lRS0YzajR6cWo4RWN4aVcwN1lWYVpJREFOQmdrcWhraUc5dzBCQVFzRkFEQVkKTVJZd0ZBWURWUVFLRXcxamJIVnpkR1Z5TG14dlkyRnNNQjRYRFRJeE1ERXhPREl3TkRFeU5Gb1hEVE14TURFeApOakl3TkRFeU5Gb3dHREVXTUJRR0ExVUVDaE1OWTJ4MWMzUmxjaTVzYjJOaGJEQ0NBU0l3RFFZSktvWklodmNOCkFRRUJCUUFEZ2dFUEFEQ0NBUW9DZ2dFQkFMS0tIRElaL2U1am5tT3VaQlJwalpHLzNEcURXTjdEMnF2R2Jod3AKNmE2VldFakdrT0dHQ1pkQVBiYnpsSkpPVU8xaFFQY3pMNHBoZFl3d0dUREVSZ1BSMGVyRTh4RmhWa2xMUVhNNgpMc3JTWnZrcEN1WDVhb0dTaFZCcGpOUnlYWjlrRkRMd1l0T3J6djhYOFJ2TUFobkVYNWN6MHBKT1drN1NJaXZYCkNvZzBmemwzT1VsL2xCelBDekdpUGJkc1NPdU4zYmFhbnJPU1lsMUZRbUd6SDI4S041NG4yLzJ5anY4U2NHTlkKd0RyZ2VmWER5cmpTeGV3ZDNLaHNFVnpLa2pBelRWY25YYTNOVjJxWVgvbHd2RFU0dCtBZnZTamVucWpjbVp3KwpadHFrSzZzT2NkcDVZaHF2T3p3UGh5S3dlaGVvdEc2Yzc2a0VZeDYwUUF4cjM3c0NBd0VBQWFNak1DRXdEZ1lEClZSMFBBUUgvQkFRREFnSUVNQThHQTFVZEV3RUIvd1FGTUFNQkFmOHdEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUIKQUliNTI1MjJ4MW1rSVNYcUhvWEpWVEVOK2YwVWhQWW1VdjhvTmk5cTBGa2MxcXRrb2ZxM1Z4Q1BSMzVZUHdWTgo0SUxjdFNyaHpCZFZBKzhRRktCMVdEaDIvMkFBVlVPM2ZkSW1pM3NWZ2hXSjliRi9IL1diQjk0S1BnM0Jmdk4xClFrRUhoTTVLTUFlWFVCUUtKSXRTaEtzTE1GU1ZhN0gydytRVnZpOVQzZElsWHpWNXMzUEErcDhJTzdkTEJqWWEKbzZIMkd1VGdUWUFLekZwWWx0RzU4YmZEQ1dEVGpWYTRyamd4OUtmbWhDQzlpeVM0WS81ekhLUU1QMlJtVG53bgpJUXZWdWcwLzBSWkNidGZLdEt4VUk0anU5UU0xZXZLZUJCR2tuZFJMZGlpSnZXOHMydlo1dFdkTUg2anRiM3M5CmNFb0V1cmlPWmJXTWdmSkxMSXFESGlZPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+    service:
+      name: istio-sidecar-injector
+      namespace: admin7-istio-system
+      path: /inject
+      port: 443
+  failurePolicy: Fail
+  matchPolicy: Exact
+  name: sidecar-injector.istio.io
+  namespaceSelector:
+    matchExpressions:
+    - key: maistra.io/member-of
+      operator: In
+      values:
+      - admin7-istio-system
+    - key: maistra.io/ignore-namespace
+      operator: DoesNotExist
+  objectSelector: {}
+  reinvocationPolicy: Never
+  rules:
+  - apiGroups:
+    - ""
+    apiVersions:
+    - v1
+    operations:
+    - CREATE
+    resources:
+    - pods
+    scope: '*'
+  sideEffects: Unknown
+  timeoutSeconds: 30
