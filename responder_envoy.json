@@ -1,0 +1,195 @@
+{
+  "args": [
+    "proxy",
+    "sidecar",
+    "--domain",
+    "$(POD_NAMESPACE).svc.cluster.local",
+    "--configPath",
+    "/etc/istio/proxy",
+    "--binaryPath",
+    "/usr/local/bin/envoy",
+    "--serviceCluster",
+    "user7-responder-service.$(POD_NAMESPACE)",
+    "--drainDuration",
+    "45s",
+    "--parentShutdownDuration",
+    "1m0s",
+    "--discoveryAddress",
+    "istio-pilot.admin7-istio-system:15010",
+    "--zipkinAddress",
+    "jaeger-collector.admin7-istio-system.svc:9411",
+    "--dnsRefreshRate",
+    "300s",
+    "--connectTimeout",
+    "10s",
+    "--proxyAdminPort",
+    "15000",
+    "--concurrency",
+    "2",
+    "--controlPlaneAuthPolicy",
+    "NONE",
+    "--statusPort",
+    "15020",
+    "--applicationPorts",
+    "8080"
+  ],
+  "env": [
+    {
+      "name": "POD_NAME",
+      "valueFrom": {
+        "fieldRef": {
+          "apiVersion": "v1",
+          "fieldPath": "metadata.name"
+        }
+      }
+    },
+    {
+      "name": "ISTIO_META_POD_PORTS",
+      "value": "[\n    {\"name\":\"http\",\"containerPort\":8080,\"protocol\":\"TCP\"}\n]"
+    },
+    {
+      "name": "ISTIO_META_CLUSTER_ID",
+      "value": "Kubernetes"
+    },
+    {
+      "name": "POD_NAMESPACE",
+      "valueFrom": {
+        "fieldRef": {
+          "apiVersion": "v1",
+          "fieldPath": "metadata.namespace"
+        }
+      }
+    },
+    {
+      "name": "INSTANCE_IP",
+      "valueFrom": {
+        "fieldRef": {
+          "apiVersion": "v1",
+          "fieldPath": "status.podIP"
+        }
+      }
+    },
+    {
+      "name": "SERVICE_ACCOUNT",
+      "valueFrom": {
+        "fieldRef": {
+          "apiVersion": "v1",
+          "fieldPath": "spec.serviceAccountName"
+        }
+      }
+    },
+    {
+      "name": "ISTIO_META_POD_NAME",
+      "valueFrom": {
+        "fieldRef": {
+          "apiVersion": "v1",
+          "fieldPath": "metadata.name"
+        }
+      }
+    },
+    {
+      "name": "ISTIO_META_CONFIG_NAMESPACE",
+      "valueFrom": {
+        "fieldRef": {
+          "apiVersion": "v1",
+          "fieldPath": "metadata.namespace"
+        }
+      }
+    },
+    {
+      "name": "SDS_ENABLED",
+      "value": "false"
+    },
+    {
+      "name": "ISTIO_META_INTERCEPTION_MODE",
+      "value": "REDIRECT"
+    },
+    {
+      "name": "ISTIO_META_INCLUDE_INBOUND_PORTS",
+      "value": "8080"
+    },
+    {
+      "name": "ISTIO_METAJSON_ANNOTATIONS",
+      "value": "{\"openshift.io/deployment-config.latest-version\":\"2\",\"openshift.io/deployment-config.name\":\"user7-responder-service\",\"openshift.io/deployment.name\":\"user7-responder-service-2\",\"openshift.io/scc\":\"restricted\",\"sidecar.istio.io/inject\":\"true\"}\n"
+    },
+    {
+      "name": "ISTIO_METAJSON_LABELS",
+      "value": "{\"app\":\"user7-responder-service\",\"deployment\":\"user7-responder-service-2\",\"deploymentconfig\":\"user7-responder-service\",\"group\":\"erd-services\"}\n"
+    },
+    {
+      "name": "ISTIO_META_WORKLOAD_NAME",
+      "value": "user7-responder-service-2"
+    },
+    {
+      "name": "ISTIO_META_OWNER",
+      "value": "kubernetes://apis/v1/namespaces/user7-er-demo/replicationcontrollers/user7-responder-service-2"
+    }
+  ],
+  "image": "registry.redhat.io/openshift-service-mesh/proxyv2-rhel8@sha256:6b83feaf40326377881d8e1d82592d186527f838ee78ad717cdf88f44b89748d",
+  "imagePullPolicy": "IfNotPresent",
+  "name": "istio-proxy",
+  "ports": [
+    {
+      "containerPort": 15090,
+      "name": "http-envoy-prom",
+      "protocol": "TCP"
+    }
+  ],
+  "readinessProbe": {
+    "failureThreshold": 30,
+    "httpGet": {
+      "path": "/healthz/ready",
+      "port": 15020,
+      "scheme": "HTTP"
+    },
+    "initialDelaySeconds": 1,
+    "periodSeconds": 2,
+    "successThreshold": 1,
+    "timeoutSeconds": 1
+  },
+  "resources": {
+    "limits": {
+      "cpu": "500m",
+      "memory": "128Mi"
+    },
+    "requests": {
+      "cpu": "100m",
+      "memory": "128Mi"
+    }
+  },
+  "securityContext": {
+    "allowPrivilegeEscalation": false,
+    "capabilities": {
+      "drop": [
+        "ALL",
+        "KILL",
+        "MKNOD",
+        "SETGID",
+        "SETUID"
+      ]
+    },
+    "privileged": false,
+    "readOnlyRootFilesystem": true,
+    "runAsGroup": 1337,
+    "runAsNonRoot": true,
+    "runAsUser": 1000780001
+  },
+  "terminationMessagePath": "/dev/termination-log",
+  "terminationMessagePolicy": "File",
+  "volumeMounts": [
+    {
+      "mountPath": "/etc/istio/proxy",
+      "name": "istio-envoy"
+    },
+    {
+      "mountPath": "/etc/certs/",
+      "name": "istio-certs",
+      "readOnly": true
+    },
+    {
+      "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+      "name": "responder-service-token-6v4kl",
+      "readOnly": true
+    }
+  ]
+}
