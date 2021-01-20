@@ -1,0 +1,20 @@
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: incident-service-internal
+spec:
+  rules:
+  - from:
+    - source:
+        namespaces:
+        - user7-er-demo
+    to:
+    - operation:
+        methods:
+        - '*'
+  selector:
+    matchLabels:
+      app: user7-incident-service
+      group: erd-services
+

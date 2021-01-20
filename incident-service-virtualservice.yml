@@ -1,0 +1,20 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: incident-service-virtualservice
+spec:
+  hosts:
+  - incident-service.user7.apps.cluster-sm-ilt.sm-ilt.ilt.opentlc.com
+  gateways:
+  - erd-wildcard-gateway.admin7-istio-system.svc.cluster.local
+  http:
+  - match:
+    - uri:
+        prefix: /incidents
+    route:
+    - destination:
+        port:
+          number: 8080
+        host: user7-incident-service.user7-er-demo.svc.cluster.local
+

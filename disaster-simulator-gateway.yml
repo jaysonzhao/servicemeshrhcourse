@@ -1,0 +1,21 @@
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  annotations:
+    openshift.io/host.generated: 'true'
+  labels:
+    app: disaster-simulator
+  name: disaster-simulator-gateway
+spec:
+  host: disaster-simulator.user7.apps.cluster-sm-ilt.sm-ilt.ilt.opentlc.com
+  port:
+    targetPort: https
+  tls:
+    termination: passthrough
+  to:
+    kind: Service
+    name: istio-ingressgateway
+    weight: 100
+  wildcardPolicy: None
+

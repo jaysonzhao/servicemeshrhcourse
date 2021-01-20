@@ -1,0 +1,11 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: responder-simulator-client-mtls
+spec:
+  host: user7-responder-simulator.user7-er-demo.svc.cluster.local
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
+

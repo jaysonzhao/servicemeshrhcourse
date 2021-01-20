@@ -1,0 +1,21 @@
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  annotations:
+    openshift.io/host.generated: 'true'
+  labels:
+    app: incident-priority-service
+  name: incident-priority-service-gateway
+spec:
+  host: incident-priority-service.user7.apps.cluster-sm-ilt.sm-ilt.ilt.opentlc.com
+  port:
+    targetPort: https
+  tls:
+    termination: passthrough
+  to:
+    kind: Service
+    name: istio-ingressgateway
+    weight: 100
+  wildcardPolicy: None
+

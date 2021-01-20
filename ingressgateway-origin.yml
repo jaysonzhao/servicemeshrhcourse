@@ -1,0 +1,14 @@
+---
+apiVersion: authentication.istio.io/v1alpha1
+kind: Policy
+metadata:
+  name: ingressgateway-origin
+spec:
+  targets:
+    - name: istio-ingressgateway
+  origins:
+    - jwt:
+        issuer: https://sso-erd-sso.apps.cluster-sm-ilt.sm-ilt.ilt.opentlc.com/auth/realms/user7-emergency-realm
+        jwksUri: https://sso-erd-sso.apps.cluster-sm-ilt.sm-ilt.ilt.opentlc.com/auth/realms/user7-emergency-realm/protocol/openid-connect/certs
+  principalBinding: USE_ORIGIN
+
